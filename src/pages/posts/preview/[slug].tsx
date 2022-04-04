@@ -55,6 +55,9 @@ export default function PostPreview({post}: PostPreviewProps) {
      )
 }
 
+//dentro do paths pode passar pgs slug para serem gerados de forma estática - na hora da build ja gera o html disso
+// como nao passamos nada, os posts serão gerados de forma estática mas na vez q a primeira pessoa acessar 
+//blocking: so qndo todo o conteudo tiver sido gerado de forma estática é q mostra o html da página
 export const getStaticPaths = () => {
     return {
         paths: [],
@@ -84,6 +87,7 @@ export const getStaticProps: GetStaticProps = async ({  params }) => {
     return {
         props: {
             post
-        }
+        },
+        revalidate: 60 * 30 // 30minutos
     }
 }
